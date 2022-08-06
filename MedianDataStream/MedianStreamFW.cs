@@ -61,44 +61,42 @@ namespace MedianDataStream
             }
            
             if(count < size) { count++; }
-            if (count % 2 == 0)
-            {
-                this.median = (minHeap.Peek() + maxHeap.Peek()) / 2.0;
-            }
-            else
-            {
-                this.median = maxHeap.Peek();
-            }
             index++;
+            UpdateMedian();
         }
 
         /// <summary>
         /// Remove the data from heaps using its index in the original data array.
         /// </summary>
-        /// <param name="indexi"></param>
+        /// <param name="index"></param>
         /// <param name="value"></param>
-        private void Remove(int indexi, int value)
+        private void Remove(int index, int value)
         {
             if(value == Int32.MinValue)
             {
                 return;  //nothing to remove from the data stream
             }
 
-            if(minHeap.ContainsIndex(indexi))
+            if(minHeap.ContainsIndex(index))
             {
-                minHeap.Remove(indexi);
+                minHeap.Remove(index);
             }
             else
             {
-                maxHeap.Remove(indexi);
+                maxHeap.Remove(index);
             }
 
             if (minHeap.Count() > maxHeap.Count())
             {
-                (int index, int num) = minHeap.Pop();
-                maxHeap.Push(index, num);
+                (int ind, int num) = minHeap.Pop();
+                maxHeap.Push(ind, num);
             }
             count--;
+            UpdateMedian();
+        }
+
+        private void UpdateMedian()
+        {
             if (count % 2 == 0)
             {
                 this.median = (minHeap.Peek() + maxHeap.Peek()) / 2.0;
