@@ -1,0 +1,9 @@
+.vs/*
+/MedianDataStream/obj/*
+/MedianDataStream/obj/Debug/*
+/MedianDataStreamTests/obj/*
+/MedianDataStreamTests/bin/*
+/MedianDataStreamTests/bin/*/*
+/MedianDataStreamTests/obj/Debug/*
+/MedianDataStream/bin/*
+
